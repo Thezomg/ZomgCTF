@@ -1,0 +1,38 @@
+name: ZomgCTF
+main: com.thezomg.zomgctf.ZomgCTF
+version: ${project.version}
+description: ${project.description}
+website: ${project.url}
+authors: [Deaygo]
+permissions:
+  zomgctf:
+    description: Allow the player all CTF Admin permissions
+    children:
+      zomgctf.flags:
+        description: Allow the player to set the flag positions
+      zomgctf.flags.reset:
+        description: Allow the player to reset the flags back to home naturally (if there is no carrier)
+      zomgctf.flags.forcereset:
+        description: Allow the player to force reset the flags back (with or without carrier)
+      zomgctf.team:
+        description: Allow the player to manage teams.
+      zomgctf.player:
+        description: General player commands
+commands:
+  g:
+    description: Global chat
+    usage: |
+          /g [message]
+  teams:
+    description: List teams
+    usage: |
+          /teams
+  score:
+    description: Show the current scores
+    usage: |
+          /score
+  drop:
+    description: Drop the flag if you are carrying it
+    permission: zomgctf.player
+    usage: |
+          /drop
