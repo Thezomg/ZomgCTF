@@ -104,9 +104,14 @@ public class Team {
         dirty = true;
     }
     
-    protected void kill() {
-        this.kills++;
-        this.score += plugin.config.kill_score;
+    protected void kill(String player) {
+        if (players.containsKey(player.toLowerCase())) {
+            int player_score = players.get(player.toLowerCase());
+            player_score += plugin.config.kill_score;
+            players.put(player.toLowerCase(), player_score);
+            this.kills++;
+            this.score += plugin.config.kill_score;
+        }
     }
     
     public Player getCarrier() {
