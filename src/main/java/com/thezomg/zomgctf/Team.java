@@ -21,6 +21,7 @@ public class Team {
     private HashMap<String, Integer> players = new HashMap<String, Integer>();
     private int score = 0;
     private int kills = 0;
+    private int captures = 0;
     private Location spawn;
     private Location flagHome = null;
     private Location flagLocation = null;
@@ -64,7 +65,7 @@ public class Team {
     public String getName() {
         return name;
     }
-    
+
     public boolean isOnTeam(String player) {
         return players.containsKey(player.toLowerCase());
     }
@@ -89,8 +90,31 @@ public class Team {
         return chatColour;
     }
     
+    public Block getBlockHome() {
+        return flagHome.getWorld().getBlockAt(flagHome);
+    }
+    
+    public boolean isFlagHome() {
+        return (util.inSameLocation(flagHome, flagLocation) && (carrier == null));
+    }
+    
+    protected void capture() {
+        this.captures++;
+        this.score += plugin.config.flag_capture_score;
+        dirty = true;
+    }
+    
+    protected void kill() {
+        this.kills++;
+        this.score += plugin.config.kill_score;
+    }
+    
     public Player getCarrier() {
         return carrier;
+    }
+    
+    public void setCarrier(Player player) {
+        this.carrier = player;
     }
     
     public void dropflag() {
@@ -194,5 +218,20 @@ public class Team {
         } catch (InvalidConfigurationException ex) {
             plugin.getLogger().log(Level.SEVERE, "Invalid team config from " + config_file, ex);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Team)) return false;
+        
+        return this.name.equalsIgnoreCase(((Team)o).getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + (this.name != null ? this.name.hashCode() : 0);
+        return hash;
     }
 }
