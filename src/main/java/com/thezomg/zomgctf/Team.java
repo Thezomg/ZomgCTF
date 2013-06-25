@@ -124,6 +124,15 @@ public class Team {
     
     public void dropflag() {
         if (carrier != null) {
+            Team ct = plugin.tm.getPlayerTeam(carrier.getName());
+            if (ct == null) {
+                // A carrier should always have a team, this shouldn't happen.
+                carrier = null;
+                respawnFlag();
+                return;
+            }
+            plugin.getServer().broadcastMessage(ct.getChatColour() + carrier.getName() + ChatColor.BLUE + " dropped the " + chatColour + name + ChatColor.BLUE + " flag");
+            
             Location loc = carrier.getLocation();
             Block b = loc.getWorld().getBlockAt(loc);
             int count = 0;
