@@ -63,7 +63,7 @@ public class util {
             if (material == null)
                 throw new IllegalArgumentException("No material matching: '" + block_name + "'");
 
-            ItemStack item_stack = new ItemStack(material, 1, Short.parseShort(blockNameSplit[1]));
+            ItemStack item_stack = new ItemStack(material, 1, (short) data);
 
             return item_stack;
         } else {
