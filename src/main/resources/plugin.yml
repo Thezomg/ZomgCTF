@@ -36,3 +36,5 @@ commands:
     permission: zomgctf.player
     usage: |
           /drop
+  zomfctf:
+    descroption: Management functions for ZomgCTF
