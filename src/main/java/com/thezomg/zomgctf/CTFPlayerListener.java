@@ -52,7 +52,7 @@ public class CTFPlayerListener implements Listener {
             Team pt = plugin.tm.getPlayerTeam(player.getName());
             
             // If both players have a team, give the killer and their team some points.
-            if (kt != null && pt != null) {
+            if (kt != null && pt != null && kt != pt) {
                 kt.kill(killer.getName());
             }
         }
