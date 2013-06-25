@@ -63,9 +63,9 @@
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
-                <targetPath>${basedir}/src/main/resources</targetPath>
+                <targetPath>.</targetPath>
                 <filtering>true</filtering>
-                <directory>.</directory>
+                <directory>${basedir}/src/main/resources</directory>
                 <includes>
                     <include>plugin.yml</include>
                 </includes>
